@@ -6,9 +6,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijp.assignment2.MyController">
    <children>
-      <Button layoutX="269.0" layoutY="287.0" mnemonicParsing="false" onAction="#sayHello" text="Forward" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
-      <Button layoutX="195.0" layoutY="313.0" mnemonicParsing="false" text="Turn left" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="340.0" />
-      <Button layoutX="340.0" layoutY="313.0" mnemonicParsing="false" text="Turn right" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="150.0" />
+      <Button layoutX="269.0" layoutY="287.0" mnemonicParsing="false" onAction="#goForward" text="Forward" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
+      <Button layoutX="195.0" layoutY="313.0" mnemonicParsing="false" onAction="#turnLeft" text="Turn left" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="340.0" />
+      <Button layoutX="340.0" layoutY="313.0" mnemonicParsing="false" onAction="#turnRight" text="Turn right" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="150.0" />
       <ImageView fx:id="imageView" fitHeight="328.0" fitWidth="549.0" layoutX="26.0" layoutY="54.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="basketView" fitHeight="97.0" fitWidth="136.0" layoutX="382.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true" />
    </children>

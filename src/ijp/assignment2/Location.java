@@ -1,17 +1,17 @@
 package ijp.assignment2;
 import java.util.HashMap;
 
+import javafx.scene.image.Image;
+
 public class Location {
 	
 
 	private HashMap<Coordination, Location> exits;
-	private String description;
+	private Image[] picture;
 	
-	
-	//initial constructor
-	public Location(String description) {
-		this.description = description;
+	public Location() {
 		exits = new HashMap<>();
+		
 	}
 	
 	
@@ -23,10 +23,14 @@ public class Location {
 		return exits.get(direction);
 	}
 	
-	public String getDescription() {
-		return description;
+	
+	public void setImages(Image[] picture) {
+		this.picture=picture;
 	}
 	
+	public Image[] getImages() {
+		return picture;
+	}
 	
 }
 

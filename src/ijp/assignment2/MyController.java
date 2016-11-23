@@ -7,36 +7,51 @@ import javafx.scene.image.ImageView;
 
 public class MyController {
 		
+		private MapWorld world = new MapWorld();
+		
+		
 		@FXML
 		private ImageView imageView;
+
+
+		private Image currentImage;
 		
-		@FXML
-		private ImageView basketView;
+		
+		//@FXML
+		//private ImageView basketView;
 
 		public void Initialise() {
-			Image image = new Image("/pictures/loc1-front.png");
+			Image image = new Image("/pictures/loc1-north.png");
 			imageView.setImage(image);
+			
 		}
 		
-		public void sayHello(ActionEvent event) {
-			System.out.println("Hello");
-		}
 		
 		public void goForward(ActionEvent event) {
-			MapWorld world = new MapWorld();
 			world.goForward();
+			currentImage = world.getImage();
+			imageView.setImage(currentImage);
+			
+			//image needs to jump to next location, if there is one
+			//from loc1 to lo2, etc.
+			//otherwise you get an error message
 		}
 		
 		public void turnLeft(ActionEvent event) {
-			MapWorld world = new MapWorld();
 			world.turnLeft();
-			// call to MapWorld
+			currentImage = world.getImage();
+			imageView.setImage(currentImage);
+			// image needs to load for new direction when the button is pressed
+			
 		}
 		
 		public void turnRight(ActionEvent event) {
-			MapWorld world = new MapWorld();
 			world.turnRight();
-			
+			currentImage = world.getImage();
+			imageView.setImage(currentImage);
+			// image needs to load for new direction when the button is pressed
 		}
+		
+		
 	}
 
