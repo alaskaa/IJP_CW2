@@ -29,6 +29,7 @@ public class MyApplication extends Application{
 					this.getClass().getResource(viewerFxml).openStream());
 			Scene scene = new Scene(page);
 			stage.setScene(scene);
+			stage.setResizable(false);
 			
 			MyController controller = (MyController) fxmlLoader.getController();
 			controller.Initialise();

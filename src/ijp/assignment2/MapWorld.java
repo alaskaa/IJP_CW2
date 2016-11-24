@@ -1,4 +1,3 @@
-
 package ijp.assignment2;
 
 import javafx.scene.image.Image;
@@ -17,11 +16,17 @@ public class MapWorld {
 	private Location loc5;
 	private Location loc6;
 	private Location loc7;
+	
+	private Item sword;
+	private Item owl;
+	private Item potion;
+	private Item bread;
+	private Item cat;
 
 	public MapWorld() {
 		createLocations();
 		facing = 0;
-		updateDir(facing);
+		updateCoordinates(facing);
 	}
 
 	private void createLocations() {
@@ -58,7 +63,7 @@ public class MapWorld {
 	}
 
 
-	public void updateDir(int facing) {
+	public void updateCoordinates(int facing) {
 		switch (facing) {
 		case 0:
 			direction = Coordination.NORTH;
@@ -99,7 +104,7 @@ public class MapWorld {
 			System.out.println("You can't go here");
 		} else {
 			currentLocation = nextLocation;
-			System.out.println(currentLocation.toString());
+			//System.out.println(currentLocation.toString());
 			updatePicture();
 
 		}
@@ -111,7 +116,7 @@ public class MapWorld {
 		if (facing < 0) {
 			facing = 3;
 		}
-		updateDir(facing);
+		updateCoordinates(facing);
 		updatePicture();
 		System.out.println(facing);
 	}
@@ -121,7 +126,7 @@ public class MapWorld {
 		if (facing > 3) {
 			facing = 0;
 		}
-		updateDir(facing);
+		updateCoordinates(facing);
 		updatePicture();
 		System.out.println(facing);
 	}
