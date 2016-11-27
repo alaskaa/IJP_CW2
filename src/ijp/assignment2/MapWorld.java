@@ -1,14 +1,19 @@
 package ijp.assignment2;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 
 public class MapWorld {
 
 	private Coordination direction;
 	private Location currentLocation;
+	private Location nextLoc;
 	private Image currentImage;
-
+	private Image currentMapView;
 	private int facing;
+	private ArrayList<Item> inventory;
+
 	private Location loc1;
 	private Location loc2;
 	private Location loc3;
@@ -16,15 +21,14 @@ public class MapWorld {
 	private Location loc5;
 	private Location loc6;
 	private Location loc7;
-	
-	private Item sword;
-	private Item owl;
-	private Item potion;
-	private Item bread;
-	private Item cat;
+
+	private Item swordItem = new Item(new Image("/pictures/sword.png"));
+	private Item owlItem = new Item(new Image("/pictures/owl.png"));
+	private Item potionItem = new Item(new Image("/pictures/potion.png"));
 
 	public MapWorld() {
 		createLocations();
+		inventory = new ArrayList<Item>();
 		facing = 0;
 		updateCoordinates(facing);
 	}
@@ -32,19 +36,22 @@ public class MapWorld {
 	private void createLocations() {
 
 		loc1 = new Location();
-		fillLocation1();
+		loc1.setImages(fillLocations("1"));
 		loc2 = new Location();
-		fillLocation2();
+		loc2.setImages(fillLocations("2"));
 		loc3 = new Location();
-		fillLocation3();
+		loc3.setImages(fillLocations("3"));
+		loc3.addItemToLocation(owlItem);
 		loc4 = new Location();
-		fillLocation4();
+		loc4.setImages(fillLocations("4"));
 		loc5 = new Location();
-		fillLocation5();
+		loc5.setImages(fillLocations("5"));
+		loc5.addItemToLocation(swordItem);
 		loc6 = new Location();
-		fillLocation6();
+		loc6.setImages(fillLocations("6"));
 		loc7 = new Location();
-		fillLocation7();
+		loc7.setImages(fillLocations("7"));
+		loc7.addItemToLocation(potionItem);
 
 		loc1.setExit(Coordination.NORTH, loc2);
 		loc2.setExit(Coordination.EAST, loc4);
@@ -60,8 +67,61 @@ public class MapWorld {
 		loc7.setExit(Coordination.NORTH, loc6);
 
 		setCurrentLocation(loc1);
+
 	}
 
+	public Image[] fillLocations(String num) {
+
+		String n = "/pictures/loc" + num + "-north.png";
+		String e = "/pictures/loc" + num + "-east.png";
+		String s = "/pictures/loc" + num + "-south.png";
+		String w = "/pictures/loc" + num + "-west.png";
+		String m = "/pictures/map_loc" + num + ".png";
+		Image imageN = new Image(n);
+		Image imageE = new Image(e);
+		Image imageS = new Image(s);
+		Image imageW = new Image(w);
+		Image imageM = new Image(m);
+		Image[] pictures = { imageN, imageE, imageS, imageW, imageM };
+		return pictures;
+	}
+
+	public void goForward() {
+		Location nextLocation = currentLocation.getExit(direction);
+
+		if (nextLocation == null) {
+
+		} else {
+			currentLocation = nextLocation;
+			updatePicture();
+			updateMap();
+			nextLoc = currentLocation.getExit(direction);
+
+		}
+
+	}
+
+	public void turnLeft() {
+		facing -= 1;
+		if (facing < 0) {
+			facing = 3;
+		}
+		updateCoordinates(facing);
+		updatePicture();
+		nextLoc = currentLocation.getExit(direction);
+
+	}
+
+	public void turnRight() {
+		facing += 1;
+		if (facing > 3) {
+			facing = 0;
+		}
+		updateCoordinates(facing);
+		updatePicture();
+		nextLoc = currentLocation.getExit(direction);
+
+	}
 
 	public void updateCoordinates(int facing) {
 		switch (facing) {
@@ -93,42 +153,12 @@ public class MapWorld {
 		}
 	}
 
+	public void updateMap() {
+		currentMapView = currentLocation.getImages()[4];
+	}
+
 	public Image getImage() {
 		return currentImage;
-	}
-	
-	public void goForward() {
-		Location nextLocation = currentLocation.getExit(direction);
-
-		if (nextLocation == null) {
-			System.out.println("You can't go here");
-		} else {
-			currentLocation = nextLocation;
-			//System.out.println(currentLocation.toString());
-			updatePicture();
-
-		}
-
-	}
-
-	public void turnLeft() {
-		facing -= 1;
-		if (facing < 0) {
-			facing = 3;
-		}
-		updateCoordinates(facing);
-		updatePicture();
-		System.out.println(facing);
-	}
-
-	public void turnRight() {
-		facing += 1;
-		if (facing > 3) {
-			facing = 0;
-		}
-		updateCoordinates(facing);
-		updatePicture();
-		System.out.println(facing);
 	}
 
 	public Location getCurrentLocation() {
@@ -139,73 +169,42 @@ public class MapWorld {
 		this.currentLocation = currentLocation;
 	}
 
-	public void fillLocation1() {
-		Image imageN = new Image("/pictures/loc1-north.png");
-		Image imageE = new Image("/pictures/loc1-east.png");
-		Image imageS = new Image("/pictures/loc1-south.png");
-		Image imageW = new Image("/pictures/loc1-west.png");
-		Image[] pictures1 = { imageN, imageE, imageS, imageW };
-		loc1.setImages(pictures1);
-
+	public Location getNextLocation() {
+		return nextLoc;
 	}
 
-	public void fillLocation2() {
-		Image imageN = new Image("/pictures/loc2-north.png");
-		Image imageE = new Image("/pictures/loc2-east.png");
-		Image imageS = new Image("/pictures/loc2-south.png");
-		Image imageW = new Image("/pictures/loc2-west.png");
-		Image[] pictures2 = { imageN, imageE, imageS, imageW };
-		loc2.setImages(pictures2);
-
+	public void pickUpItem(Item i) {
+		if (currentLocation.hasPortableItem(i)) {
+			currentLocation.removeItemFromLocation(i);
+			inventory.add(i);
+		}
 	}
 
-	public void fillLocation3() {
-		Image imageN = new Image("/pictures/loc3-north.png");
-		Image imageE = new Image("/pictures/loc3-east.png");
-		Image imageS = new Image("/pictures/loc3-south.png");
-		Image imageW = new Image("/pictures/loc3-west.png");
-		Image[] pictures3 = { imageN, imageE, imageS, imageW };
-		loc3.setImages(pictures3);
-
+	public void dropItem(Item i) {
+		if (currentLocation.hasPortableItem(i) == false) {
+			inventory.remove(i);
+			currentLocation.addItemToLocation(i);
+		}
 	}
 
-	public void fillLocation4() {
-		Image imageN = new Image("/pictures/loc4-north.png");
-		Image imageE = new Image("/pictures/loc4-east.png");
-		Image imageS = new Image("/pictures/loc4-south.png");
-		Image imageW = new Image("/pictures/loc4-west.png");
-		Image[] pictures4 = { imageN, imageE, imageS, imageW };
-		loc4.setImages(pictures4);
-
+	public Item getOwlItem() {
+		return owlItem;
 	}
 
-	public void fillLocation5() {
-		Image imageN = new Image("/pictures/loc5-north.png");
-		Image imageE = new Image("/pictures/loc5-east.png");
-		Image imageS = new Image("/pictures/loc5-south.png");
-		Image imageW = new Image("/pictures/loc5-west.png");
-		Image[] pictures5 = { imageN, imageE, imageS, imageW };
-		loc5.setImages(pictures5);
+	public Item getSwordItem() {
+		return swordItem;
 	}
 
-	public void fillLocation6() {
-		Image imageN = new Image("/pictures/loc6-north.png");
-		Image imageE = new Image("/pictures/loc6-east.png");
-		Image imageS = new Image("/pictures/loc6-south.png");
-		Image imageW = new Image("/pictures/loc6-west.png");
-		Image[] pictures6 = { imageN, imageE, imageS, imageW };
-		loc6.setImages(pictures6);
-
+	public Item getPotionItem() {
+		return potionItem;
 	}
 
-	public void fillLocation7() {
-		Image imageN = new Image("/pictures/loc7-north.png");
-		Image imageE = new Image("/pictures/loc7-east.png");
-		Image imageS = new Image("/pictures/loc7-south.png");
-		Image imageW = new Image("/pictures/loc7-west.png");
-		Image[] pictures7 = { imageN, imageE, imageS, imageW };
-		loc7.setImages(pictures7);
+	public Image getCurrentMapView() {
+		return currentMapView;
+	}
 
+	public void setCurrentMapView(Image currentMapView) {
+		this.currentMapView = currentMapView;
 	}
 
 }

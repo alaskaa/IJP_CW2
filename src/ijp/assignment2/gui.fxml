@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijp.assignment2.MyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ijp.assignment2.MyController">
    <children>
-      <Button layoutX="245.0" layoutY="437.0" mnemonicParsing="false" onAction="#goForward" prefHeight="26.0" prefWidth="94.0" text="Forward" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="511.0" />
-      <Button layoutX="152.0" layoutY="463.0" mnemonicParsing="false" onAction="#turnLeft" prefHeight="26.0" prefWidth="94.0" text="Turn left" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="152.0" AnchorPane.rightAnchor="604.0" />
-      <Button layoutX="338.0" layoutY="463.0" mnemonicParsing="false" onAction="#turnRight" prefHeight="26.0" prefWidth="94.0" text="Turn right" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="338.0" AnchorPane.rightAnchor="418.0" />
-      <ImageView fx:id="imageView" fitHeight="310.0" fitWidth="499.0" layoutX="43.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="mapView" fitHeight="221.0" fitWidth="214.0" layoutX="595.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true" />
-      <MenuBar prefHeight="29.0" prefWidth="850.0">
+      <Button fx:id="forward" layoutX="266.0" layoutY="436.0" mnemonicParsing="false" onAction="#goForward" prefHeight="26.0" prefWidth="94.0" text="Forward" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="266.0" AnchorPane.rightAnchor="490.0" />
+      <Button layoutX="173.0" layoutY="473.0" mnemonicParsing="false" onAction="#turnLeft" prefHeight="26.0" prefWidth="94.0" text="Turn left" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="583.0" />
+      <Button layoutX="360.0" layoutY="473.0" mnemonicParsing="false" onAction="#turnRight" prefHeight="26.0" prefWidth="94.0" text="Turn right" AnchorPane.bottomAnchor="28.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="396.0" />
+      <ImageView fx:id="imageView" fitHeight="298.0" fitWidth="530.0" layoutX="48.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="mapView" fitHeight="162.0" fitWidth="160.0" layoutX="639.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true" />
+      <MenuBar fx:id="myMenu" prefHeight="29.0" prefWidth="850.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Pick up">
+          <Menu fx:id="pick" mnemonicParsing="false" text="Pick up">
             <items>
-              <MenuItem mnemonicParsing="false" text="Sword" />
-                  <MenuItem mnemonicParsing="false" text="Owl" />
-                  <MenuItem mnemonicParsing="false" text="Potion" />
-                  <MenuItem mnemonicParsing="false" text="Bread" />
-                  <MenuItem mnemonicParsing="false" text="Cat" />
+              <MenuItem fx:id="pickSword" mnemonicParsing="false" onAction="#pickUpSword" text="Sword" />
+                  <MenuItem fx:id="pickOwl" mnemonicParsing="false" onAction="#pickUpOwl" text="Owl" />
+                  <MenuItem fx:id="pickPotion" mnemonicParsing="false" onAction="#pickUpPotion" text="Potion" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Drop">
+          <Menu fx:id="drop" mnemonicParsing="false" text="Drop">
             <items>
-              <MenuItem mnemonicParsing="false" text="Sword" />
-                  <MenuItem mnemonicParsing="false" text="Owl" />
-                  <MenuItem mnemonicParsing="false" text="Potion" />
-                  <MenuItem mnemonicParsing="false" text="Bread" />
-                  <MenuItem mnemonicParsing="false" text="Cat" />
+              <MenuItem fx:id="dropSword" mnemonicParsing="false" onAction="#dropSword" text="Sword" />
+                  <MenuItem fx:id="dropOwl" mnemonicParsing="false" onAction="#dropOwl" text="Owl" />
+                  <MenuItem fx:id="dropPotion" mnemonicParsing="false" onAction="#dropPotion" text="Potion" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <ImageView fx:id="swordView" fitHeight="50.0" fitWidth="50.0" layoutX="608.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="owlView" fitHeight="50.0" fitWidth="50.0" layoutX="702.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="potionView" fitHeight="50.0" fitWidth="50.0" layoutX="633.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="breadView" fitHeight="50.0" fitWidth="50.0" layoutX="558.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="catView" fitHeight="50.0" fitWidth="50.0" layoutX="702.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="swordView" fitHeight="50.0" fitWidth="50.0" layoutX="639.0" layoutY="386.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="owlView" fitHeight="50.0" fitWidth="50.0" layoutX="744.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="potionView" fitHeight="50.0" fitWidth="50.0" layoutX="694.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="swordViewGame" fitHeight="138.0" fitWidth="86.0" layoutX="87.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="owlViewGame" fitHeight="78.0" fitWidth="72.0" layoutX="427.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="potionViewGame" fitHeight="78.0" fitWidth="60.0" layoutX="300.0" layoutY="303.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="639.0" layoutY="92.0" prefHeight="29.0" prefWidth="94.0" text="Map">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="639.0" layoutY="342.0" prefHeight="29.0" prefWidth="94.0" text="Inventory">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
