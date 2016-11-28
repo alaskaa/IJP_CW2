@@ -10,15 +10,18 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
  
 /**
- * The main program for launching a PictureViewer application.
+ * The main program for launching the application.
  *
  * @author  Sibylle Sehl
- * @version Version 1, 15th Nov 2016
+ * @version Version 3, 28th Nov 2016
  */
 public class MyApplication extends Application{
        
+	
 
-
+	/**
+	 * Starting the Application.
+	 */
 	@Override
 	public void start(Stage stage){
 		
@@ -43,6 +46,7 @@ public class MyApplication extends Application{
 		
 		
 	}
+	
 	public static void main(String args[]){
 		launch(args);
 	}

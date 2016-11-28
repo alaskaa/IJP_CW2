@@ -6,12 +6,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.*;
 
+/**
+ * The Controller class that is hooked up to the fxml file and controls it.
+ *
+ * @author Sibylle Sehl
+ * @version Version 3, 28th Nov 2016
+ */
 public class MyController {
 
 	private MapWorld world;
 	private Image currentImage;
 	private Image currentMapView;
-	
+
 	@FXML
 	private ImageView imageView;
 	@FXML
@@ -43,8 +49,11 @@ public class MyController {
 	private MenuItem dropOwl;
 	@FXML
 	private MenuItem dropPotion;
-	
 
+	/**
+	 * Initialises the first view visible in the location and initialises an
+	 * object of the world
+	 */
 	public void Initialise() {
 		Image image = new Image("/pictures/loc1-north.png");
 		imageView.setImage(image);
@@ -60,6 +69,13 @@ public class MyController {
 
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the forward
+	 * button is pressed
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml "Forward" button
+	 */
 	public void goForward(ActionEvent event) {
 		world.goForward();
 		checkForItems();
@@ -75,11 +91,17 @@ public class MyController {
 			mapView.setImage(currentMapView);
 			imageView.setImage(currentImage);
 			forward.setVisible(true);
-
 		}
-
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the turn
+	 * left button is pressed
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml "Turn left"
+	 *            button
+	 */
 	public void turnLeft(ActionEvent event) {
 		world.turnLeft();
 		currentImage = world.getImage();
@@ -91,6 +113,14 @@ public class MyController {
 		}
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the turn
+	 * right button is pressed
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml "Turn right"
+	 *            button
+	 */
 	public void turnRight(ActionEvent event) {
 		world.turnRight();
 		currentImage = world.getImage();
@@ -102,6 +132,15 @@ public class MyController {
 		}
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when Sword is
+	 * picked up; including disabling the visibility of the picking up the menu
+	 * item
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml Pick up Menu for
+	 *            a Sword
+	 */
 	public void pickUpSword(ActionEvent event) {
 		world.pickUpItem(world.getSwordItem());
 		pickSword.setVisible(false);
@@ -111,6 +150,15 @@ public class MyController {
 		swordView.setVisible(true);
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the sword
+	 * is dropped; including disabling the visibility of the drop the sword menu
+	 * item and enabling the pick sword menu item.
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml Drop Menu for a
+	 *            sword
+	 */
 	public void dropSword(ActionEvent event) {
 		world.dropItem(world.getSwordItem());
 		pickSword.setVisible(true);
@@ -119,6 +167,15 @@ public class MyController {
 		swordView.setVisible(false);
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the owl is
+	 * picked up; including disabling the visibility of the pick up the owl menu
+	 * item
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml Pick up Menu for
+	 *            an owl
+	 */
 	public void pickUpOwl(ActionEvent event) {
 		world.pickUpItem(world.getOwlItem());
 		pickOwl.setVisible(false);
@@ -128,6 +185,15 @@ public class MyController {
 		owlView.setVisible(true);
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the owl is
+	 * dropped; including disabling the visibility of the drop the owl menu item
+	 * and enabling the pick owl menu item.
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml Drop Menu for an
+	 *            owl
+	 */
 	public void dropOwl(ActionEvent event) {
 		world.dropItem(world.getOwlItem());
 		pickOwl.setVisible(true);
@@ -136,6 +202,15 @@ public class MyController {
 		owlView.setVisible(false);
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the potion
+	 * is picked up; including disabling the visibility of the pick up the
+	 * potion menu item
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml Pick up Menu for
+	 *            a potion
+	 */
 	public void pickUpPotion(ActionEvent event) {
 		world.pickUpItem(world.getPotionItem());
 		pickPotion.setVisible(false);
@@ -145,6 +220,15 @@ public class MyController {
 		potionView.setVisible(true);
 	}
 
+	/**
+	 * Fulfils the actions that need to be performed in the GUI when the potion
+	 * is dropped; including disabling the visibility of the drop the potion
+	 * menu item and enabling the pick potion menu item.
+	 * 
+	 * @param event
+	 *            the Action event is hooked up to the gui.fxml Drop Menu for a
+	 *            potion
+	 */
 	public void dropPotion(ActionEvent event) {
 		world.dropItem(world.getPotionItem());
 		pickPotion.setVisible(true);
@@ -153,6 +237,11 @@ public class MyController {
 		potionView.setVisible(false);
 	}
 
+	/**
+	 * Complex method to check whether the currentLocation contains a Sword, Owl
+	 * or Potion. Sets the inGame views and menu item views accordingly. Called
+	 * whenever going forward.
+	 */
 	public void checkForItems() {
 		if (world.getCurrentLocation().hasPortableItem(world.getSwordItem())) {
 			swordViewGame.setImage(world.getSwordItem().getItemImage());

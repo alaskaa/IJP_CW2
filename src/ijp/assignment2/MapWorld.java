@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 
+/**
+ * The MapWorld class models the world as a whole including the Locations and
+ * the functions a user needs to perform navigating in it.
+ *
+ * @author Sibylle Sehl
+ * @version Version 3, 28th Nov 2016
+ */
 public class MapWorld {
 
 	private Coordination direction;
@@ -33,6 +40,10 @@ public class MapWorld {
 		updateCoordinates(facing);
 	}
 
+	/**
+	 * Creates the Location objects, sets the images, sets exits and adds items
+	 * to three locations.
+	 */
 	private void createLocations() {
 
 		loc1 = new Location();
@@ -70,6 +81,15 @@ public class MapWorld {
 
 	}
 
+	/**
+	 * Adds pictures for each location and its directions to an array
+	 * 
+	 * @param num
+	 *            the number associated with each location (1st, 2nd...)
+	 * 
+	 * @returns an array of images for each location including each coordinate
+	 *          picture and a map
+	 */
 	public Image[] fillLocations(String num) {
 
 		String n = "/pictures/loc" + num + "-north.png";
@@ -86,6 +106,10 @@ public class MapWorld {
 		return pictures;
 	}
 
+	/**
+	 * Go a step forward in the logical map, enter a new location if
+	 * currentLocation has a new exit
+	 */
 	public void goForward() {
 		Location nextLocation = currentLocation.getExit(direction);
 
@@ -101,6 +125,9 @@ public class MapWorld {
 
 	}
 
+	/**
+	 * Turn left in the logical map
+	 */
 	public void turnLeft() {
 		facing -= 1;
 		if (facing < 0) {
@@ -112,6 +139,9 @@ public class MapWorld {
 
 	}
 
+	/**
+	 * Turn right in the logical map
+	 */
 	public void turnRight() {
 		facing += 1;
 		if (facing > 3) {
@@ -123,6 +153,12 @@ public class MapWorld {
 
 	}
 
+	/**
+	 * Updates the direction based on the specified integer value of facing
+	 * 
+	 * @param facing
+	 *            a value indicating which direction one is currently looking at
+	 */
 	public void updateCoordinates(int facing) {
 		switch (facing) {
 		case 0:
@@ -141,6 +177,10 @@ public class MapWorld {
 		}
 	}
 
+	/**
+	 * Updates the current image for a location based on the facing value and
+	 * accesses the location's picture at fixed position in array
+	 */
 	public void updatePicture() {
 		if (facing == 0) {
 			currentImage = currentLocation.getImages()[0];
@@ -153,26 +193,59 @@ public class MapWorld {
 		}
 	}
 
+	/**
+	 * Updates the map based on the currentLocation and retrieves the image from
+	 * last index in each location's image array
+	 */
 	public void updateMap() {
 		currentMapView = currentLocation.getImages()[4];
 	}
 
+	/**
+	 * Returns the the image the user currently looking at, which was updated in
+	 * the updatePicture() method
+	 * 
+	 * @returns the current image the user is looking at
+	 */
 	public Image getImage() {
 		return currentImage;
 	}
 
+	/**
+	 * Returns the location the user is currently in
+	 * 
+	 * @returns the current location
+	 */
 	public Location getCurrentLocation() {
 		return currentLocation;
 	}
 
+	/**
+	 * Sets the currentLocation; mutator method included for completeness
+	 * 
+	 * @param currentLocation
+	 *            the current location the user is in
+	 */
 	public void setCurrentLocation(Location currentLocation) {
 		this.currentLocation = currentLocation;
 	}
 
+	/**
+	 * Retrieves a new location at an exit
+	 * 
+	 * @returns the next location
+	 */
 	public Location getNextLocation() {
 		return nextLoc;
 	}
 
+	/**
+	 * Picking up an item in the world; removing it from currentLocation and
+	 * adding it to the inventory
+	 * 
+	 * @param i
+	 *            a specific item found at the location
+	 */
 	public void pickUpItem(Item i) {
 		if (currentLocation.hasPortableItem(i)) {
 			currentLocation.removeItemFromLocation(i);
@@ -180,6 +253,13 @@ public class MapWorld {
 		}
 	}
 
+	/**
+	 * Dropping an item in the world; removing it from the inventory and adding
+	 * it to the currentLocation
+	 * 
+	 * @param i
+	 *            a specific item in the inventory
+	 */
 	public void dropItem(Item i) {
 		if (currentLocation.hasPortableItem(i) == false) {
 			inventory.remove(i);
@@ -187,22 +267,48 @@ public class MapWorld {
 		}
 	}
 
+	/**
+	 * Accessor method to access the Owl Item in Controller
+	 * 
+	 * @returns the owl Item
+	 */
 	public Item getOwlItem() {
 		return owlItem;
 	}
 
+	/**
+	 * Accessor method to access the Sword Item in Controller
+	 * 
+	 * @returns the sword Item
+	 */
 	public Item getSwordItem() {
 		return swordItem;
 	}
 
+	/**
+	 * Accessor method to access the Potion Item in Controller
+	 * 
+	 * @returns the potion Item
+	 */
 	public Item getPotionItem() {
 		return potionItem;
 	}
 
+	/**
+	 * Retrieves the map image in the world
+	 * 
+	 * @returns the image of the map based on logical map location
+	 */
 	public Image getCurrentMapView() {
 		return currentMapView;
 	}
 
+	/**
+	 * Sets the current MapView to a specified image
+	 * 
+	 * @param an
+	 *            image for the current view of the map
+	 */
 	public void setCurrentMapView(Image currentMapView) {
 		this.currentMapView = currentMapView;
 	}
